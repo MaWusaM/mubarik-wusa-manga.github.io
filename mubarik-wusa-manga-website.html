@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mubarik Wusa-Manga — Junior Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #0F6E56;
+    --green-light: #E1F5EE;
+    --green-mid: #1D9E75;
+    --ink: #1a1a18;
+    --ink-mid: #4a4a45;
+    --ink-light: #8a8a82;
+    --cream: #faf9f5;
+    --cream-dark: #f2f0e8;
+    --border: rgba(26,26,24,0.10);
+    --border-strong: rgba(26,26,24,0.18);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Outfit', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 3rem;
+    background: rgba(250,249,245,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    letter-spacing: -0.2px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.82rem; font-weight: 400;
+    color: var(--ink-mid); text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta {
+    font-size: 0.8rem; font-weight: 500;
+    padding: 8px 20px;
+    border: 1.5px solid var(--green);
+    border-radius: 100px;
+    color: var(--green);
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-cta:hover { background: var(--green); color: #fff; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 55% 45%;
+    padding-top: 72px;
+  }
+  .hero-left {
+    padding: 6rem 4rem 5rem 3.5rem;
+    display: flex; flex-direction: column;
+    justify-content: center; gap: 2rem;
+    border-right: 1px solid var(--border);
+  }
+  .eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.72rem; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--ink-light);
+    font-weight: 500;
+  }
+  .eyebrow span {
+    display: inline-block; width: 28px; height: 1px;
+    background: var(--green-mid);
+  }
+  h1.hero-title {
+    font-family: var(--serif);
+    font-size: clamp(2.6rem, 4.5vw, 4rem);
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+    color: var(--ink);
+    max-width: 560px;
+  }
+  h1.hero-title em {
+    font-style: italic;
+    color: var(--green);
+  }
+  .hero-tagline {
+    font-size: 1rem; font-weight: 300;
+    color: var(--ink-mid);
+    max-width: 480px;
+    line-height: 1.75;
+  }
+  .hero-ctas {
+    display: flex; align-items: center; gap: 1.2rem;
+    margin-top: 0.5rem;
+  }
+  .btn-filled {
+    background: var(--ink); color: var(--cream);
+    padding: 12px 28px; border-radius: 100px;
+    font-size: 0.85rem; font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+    border: none; cursor: pointer;
+  }
+  .btn-filled:hover { background: var(--green); }
+  .btn-text {
+    font-size: 0.85rem; color: var(--ink-mid);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  .btn-text:hover { color: var(--green); }
+  .btn-text::after { content: '→'; transition: transform 0.2s; }
+  .btn-text:hover::after { transform: translateX(3px); }
+
+  .hero-right {
+    display: grid; grid-template-rows: 1fr 1fr;
+    background: var(--cream-dark);
+  }
+  .hero-stat-box {
+    padding: 3rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .stat-big {
+    font-family: var(--serif);
+    font-size: 5.5rem; line-height: 1;
+    color: var(--green);
+    letter-spacing: -3px;
+  }
+  .stat-desc {
+    font-size: 0.78rem; color: var(--ink-light);
+    margin-top: 8px; letter-spacing: 0.3px;
+    font-weight: 400;
+  }
+  .hero-skills-box {
+    padding: 2.5rem 3rem;
+    display: flex; flex-direction: column;
+    justify-content: center; gap: 1rem;
+  }
+  .skills-label {
+    font-size: 0.7rem; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--ink-light);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-size: 0.75rem; padding: 5px 14px;
+    border-radius: 100px;
+    border: 1px solid var(--border-strong);
+    color: var(--ink-mid);
+    background: var(--cream);
+  }
+  .tag.accent {
+    border-color: var(--green-mid);
+    color: var(--green);
+    background: var(--green-light);
+  }
+
+  /* SECTIONS */
+  section { padding: 5rem 3.5rem; border-top: 1px solid var(--border); }
+  .section-header {
+    display: flex; align-items: baseline; gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .section-num {
+    font-size: 0.7rem; color: var(--ink-light);
+    letter-spacing: 2px; font-weight: 500;
+  }
+  h2.section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    letter-spacing: -0.8px;
+    color: var(--ink);
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-text p {
+    font-size: 1rem; color: var(--ink-mid);
+    line-height: 1.8; margin-bottom: 1.2rem;
+    font-weight: 300;
+  }
+  .about-text p strong { color: var(--ink); font-weight: 500; }
+  .about-aside { display: flex; flex-direction: column; gap: 1.5rem; }
+  .aside-card {
+    background: var(--cream-dark);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  .aside-card h4 {
+    font-size: 0.72rem; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--ink-light);
+    margin-bottom: 1rem; font-weight: 500;
+  }
+  .lang-item {
+    display: flex; justify-content: space-between;
+    align-items: center; padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .lang-item:last-child { border: none; }
+  .lang-level {
+    font-size: 0.72rem; color: var(--green);
+    background: var(--green-light);
+    padding: 3px 10px; border-radius: 100px;
+  }
+  .cert-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+  }
+  .cert-item:last-child { border: none; }
+  .cert-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green); margin-top: 6px; flex-shrink: 0;
+  }
+  .cert-name { font-size: 0.88rem; font-weight: 500; }
+  .cert-issuer { font-size: 0.78rem; color: var(--ink-light); }
+
+  /* SKILLS */
+  .skills-section { background: var(--ink); color: var(--cream); }
+  .skills-section .section-num { color: rgba(250,249,245,0.4); }
+  .skills-section h2.section-title { color: var(--cream); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+    margin-top: 0;
+  }
+  .skill-category {
+    padding: 2rem 1.5rem;
+    background: var(--ink);
+  }
+  .skill-category h3 {
+    font-size: 0.7rem; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--green-mid);
+    margin-bottom: 1.2rem; font-weight: 500;
+  }
+  .skill-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .skill-list li {
+    font-size: 0.9rem; color: rgba(250,249,245,0.75);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .skill-list li::before {
+    content: '';
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--green-mid); flex-shrink: 0;
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2.5rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .exp-meta { padding-top: 3px; }
+  .exp-dates {
+    font-size: 0.8rem; color: var(--ink-light);
+    font-weight: 400; margin-bottom: 4px;
+  }
+  .exp-org {
+    font-size: 0.85rem; color: var(--green);
+    font-weight: 500;
+  }
+  .exp-badge {
+    display: inline-block; margin-top: 8px;
+    font-size: 0.68rem; padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--green-light);
+    color: var(--green); letter-spacing: 0.5px;
+  }
+  .exp-role {
+    font-family: var(--serif);
+    font-size: 1.2rem; letter-spacing: -0.3px;
+    margin-bottom: 0.8rem;
+  }
+  .exp-bullets {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .exp-bullets li {
+    font-size: 0.9rem; color: var(--ink-mid);
+    padding-left: 1rem; position: relative;
+    line-height: 1.6;
+  }
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--green-mid);
+  }
+  .exp-tags {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem;
+  }
+  .exp-tag {
+    font-size: 0.7rem; padding: 3px 10px;
+    border-radius: 100px;
+    border: 1px solid var(--border-strong);
+    color: var(--ink-light);
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--cream-dark);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: border-color 0.2s, transform 0.2s;
+    display: flex; flex-direction: column;
+    gap: 1rem;
+  }
+  .project-card:hover {
+    border-color: var(--green-mid);
+    transform: translateY(-2px);
+  }
+  .project-card.featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .project-tag {
+    display: inline-block;
+    font-size: 0.68rem; padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--green-light);
+    color: var(--green); letter-spacing: 0.5px;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  .project-card h3 {
+    font-family: var(--serif);
+    font-size: 1.15rem; letter-spacing: -0.3px;
+    line-height: 1.3;
+  }
+  .project-card p {
+    font-size: 0.88rem; color: var(--ink-mid);
+    line-height: 1.7; font-weight: 300;
+  }
+  .project-tools {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: auto;
+  }
+  .tool-chip {
+    font-size: 0.7rem; padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(26,26,24,0.06);
+    color: var(--ink-mid);
+    font-family: 'Courier New', monospace;
+  }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.82rem; color: var(--green);
+    text-decoration: none; font-weight: 500;
+    margin-top: 0.5rem;
+    transition: gap 0.2s;
+  }
+  .project-link:hover { gap: 10px; }
+  .project-insights {
+    display: flex; flex-direction: column; gap: 0.8rem;
+  }
+  .insight {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.85rem; color: var(--ink-mid);
+    padding: 10px;
+    background: var(--cream);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  .insight-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green); margin-top: 5px; flex-shrink: 0;
+  }
+
+  /* EDUCATION */
+  .edu-item {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2.5rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .edu-year {
+    font-size: 0.8rem; color: var(--ink-light);
+  }
+  .edu-degree {
+    font-family: var(--serif);
+    font-size: 1.15rem; letter-spacing: -0.3px;
+    margin-bottom: 4px;
+  }
+  .edu-school {
+    font-size: 0.88rem; color: var(--green);
+    font-weight: 500; margin-bottom: 8px;
+  }
+  .edu-detail {
+    font-size: 0.85rem; color: var(--ink-mid);
+    font-weight: 300; line-height: 1.6;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--green);
+    color: #fff;
+  }
+  .contact-section .section-num { color: rgba(255,255,255,0.5); }
+  .contact-section h2.section-title { color: #fff; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .contact-lead {
+    font-family: var(--serif);
+    font-size: 1.6rem; line-height: 1.4;
+    color: rgba(255,255,255,0.9);
+    font-weight: 400;
+    font-style: italic;
+  }
+  .contact-links {
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .contact-link {
+    display: flex; align-items: center;
+    gap: 1rem; padding: 1rem 1.2rem;
+    background: rgba(255,255,255,0.12);
+    border-radius: 10px;
+    text-decoration: none;
+    color: #fff;
+    transition: background 0.2s;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .contact-link:hover { background: rgba(255,255,255,0.22); }
+  .contact-link-icon {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+  .contact-link-label { font-size: 0.78rem; color: rgba(255,255,255,0.6); }
+  .contact-link-value { font-size: 0.88rem; font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    padding: 1.5rem 3.5rem;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  footer p { font-size: 0.78rem; color: var(--ink-light); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a {
+    font-size: 0.78rem; color: var(--ink-light);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--green); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * {
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero-left > *:nth-child(5) { animation-delay: 0.5s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 4rem 2rem; }
+    section { padding: 3.5rem 1.5rem; }
+    .about-grid, .skills-grid, .contact-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .exp-item, .edu-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Mubarik Wusa-Manga</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="eyebrow"><span></span>Junior Data Analyst · Accra, Ghana</div>
+    <h1 class="hero-title">Turning <em>agricultural</em> roots into <em>data</em> routes.</h1>
+    <p class="hero-tagline">
+      I use Python, SQL, Excel, and Power BI to transform complex datasets into clear, actionable insights — with a focus on agriculture, food security, development, and business.
+    </p>
+    <div class="skill-tags" style="margin-top:-0.5rem;">
+      <span class="tag accent">Open to work</span>
+      <span class="tag">Data Cleaning</span>
+      <span class="tag">EDA</span>
+      <span class="tag">Data Visualization</span>
+      <span class="tag">Research</span>
+    </div>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-filled">View my work</a>
+      <a href="#contact" class="btn-text">Let's connect</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-box">
+      <div class="stat-big">3+</div>
+      <div class="stat-desc">Years of research, field data collection &amp; analytical work</div>
+    </div>
+    <div class="hero-skills-box">
+      <div class="skills-label">Core tools</div>
+      <div class="skill-tags">
+        <span class="tag accent">Python</span>
+        <span class="tag accent">SQL</span>
+        <span class="tag accent">Power BI</span>
+        <span class="tag">Excel</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">Matplotlib</span>
+        <span class="tag">Seaborn</span>
+        <span class="tag">Scikit-learn</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About me</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a <strong>Junior Data Analyst</strong> with a background in Agricultural Biotechnology from KNUST, and practical research experience that spans household surveys, field data collection, and laboratory molecular analysis.</p>
+      <p>My journey began in the lab — extracting DNA, running PCR procedures for cowpea aphid resistance studies, and working alongside scientists at CSIR-SARI. That foundation gave me a deep respect for <strong>rigorous, evidence-based thinking</strong> that now drives how I approach data.</p>
+      <p>During my national service at the Institute for Rural Development and Innovation Studies (IRDIS), I contributed to major projects including an <strong>End-of-term evaluation for a UNFPA &amp; UNICEF Adolescent Girls Empowerment Project</strong>, the Grain Grading and Certification Project Baseline Survey, and a Strengthening Investments in Gender-Responsive Climate Adaptation (SIGRA) study.</p>
+      <p>Today, I'm a certified <strong>ALX Data Analytics graduate</strong>, expanding those skills with Python, SQL, and Power BI to solve real-world problems in agriculture, development, climate, and business.</p>
+    </div>
+    <div class="about-aside">
+      <div class="aside-card">
+        <h4>Languages</h4>
+        <div class="lang-item">
+          <span>English</span>
+          <span class="lang-level">Professional</span>
+        </div>
+        <div class="lang-item">
+          <span>Tamplem</span>
+          <span class="lang-level">Native</span>
+        </div>
+      </div>
+      <div class="aside-card">
+        <h4>Certifications</h4>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Data Analysis — ALX Ghana</div>
+            <div class="cert-issuer">Feb 2026 · Python, SQL, Power BI, EDA, Visualization</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Data Analytics — GWIT</div>
+            <div class="cert-issuer">Nov 2024 · Data Analysis &amp; Representation</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Data Science with Python — Great Learning</div>
+            <div class="cert-issuer">Nov 2024 · ML, Regression, Visualization</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Professional Development Skills — ALX</div>
+            <div class="cert-issuer">Sep 2025 · Agile, UX Research, Critical Thinking</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Skills &amp; tools</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-category">
+      <h3>Programming</h3>
+      <ul class="skill-list">
+        <li>Python</li>
+        <li>SQL</li>
+        <li>R (Statistical)</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <h3>Libraries</h3>
+      <ul class="skill-list">
+        <li>Pandas</li>
+        <li>Matplotlib</li>
+        <li>Seaborn</li>
+        <li>Scikit-learn</li>
+        <li>NumPy</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <h3>Analytics tools</h3>
+      <ul class="skill-list">
+        <li>Power BI</li>
+        <li>Microsoft Excel</li>
+        <li>Jupyter Notebook</li>
+        <li>SPSS</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <h3>Methods</h3>
+      <ul class="skill-list">
+        <li>Data Cleaning</li>
+        <li>Exploratory Analysis</li>
+        <li>Time-Series Analysis</li>
+        <li>Correlation Analysis</li>
+        <li>Survey &amp; Field Research</li>
+        <li>Scientific Writing</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Experience</h2>
+  </div>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-dates">Nov 2023 – Oct 2024</div>
+        <div class="exp-org">Institute of Rural Development and Innovation Studies (IRDIS) · KNUST</div>
+        <span class="exp-badge">Most recent</span>
+      </div>
+      <div class="exp-content">
+        <div class="exp-role">Research Assistant</div>
+        <ul class="exp-bullets">
+          <li>Conducted household and community surveys using structured questionnaires across multiple communities for socio-economic and development research.</li>
+          <li>Collected, cleaned, and validated large datasets from field activities; produced reports for project evaluation and decision-making.</li>
+          <li>Contributed to major projects: End-of-term evaluation of the UNFPA &amp; UNICEF Adolescent Girls Empowerment Project; Grain Grading and Certification Project (GGCP) Baseline Survey; SIGRA (Gender-Responsive Climate Adaptation); Environmental Conflict and Peace Building Study in Obuasi.</li>
+          <li>Assisted with literature reviews, proposal development, and research reporting for development-focused rural initiatives.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Data Collection</span>
+          <span class="exp-tag">Data Cleaning</span>
+          <span class="exp-tag">Survey Analysis</span>
+          <span class="exp-tag">Statistical Analysis</span>
+          <span class="exp-tag">Proposal Writing</span>
+          <span class="exp-tag">Literature Review</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-dates">Nov 2022 – Jan 2023</div>
+        <div class="exp-org">CSIR-SARI (Savanna Agricultural Research Institute)</div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-role">Laboratory Assistant — Intern</div>
+        <ul class="exp-bullets">
+          <li>Conducted DNA extraction, PCR, and gel electrophoresis for evaluation of cowpea resistance to aphids.</li>
+          <li>Managed fungal and bacterial culturing and subculturing, maintaining accuracy and reliability of experimental results.</li>
+          <li>Oversaw general laboratory operations including equipment maintenance and safety protocol compliance.</li>
+          <li>Collaborated with a multidisciplinary team to design and implement research experiments for innovative agricultural solutions.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Biotechnology</span>
+          <span class="exp-tag">Plant Genetics</span>
+          <span class="exp-tag">DNA Extraction</span>
+          <span class="exp-tag">PCR</span>
+          <span class="exp-tag">Lab Management</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-dates">Nov 2021 – Dec 2021</div>
+        <div class="exp-org">CSIR-SARI (Savanna Agricultural Research Institute)</div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-role">Student Laboratory Assistant — Intern</div>
+        <ul class="exp-bullets">
+          <li>Assisted in laboratory activities related to plant genetics and molecular analysis, including DNA extraction and PCR procedures.</li>
+          <li>Supported senior researchers in experimental design and data recording.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Plant Genetics</span>
+          <span class="exp-tag">Molecular Analysis</span>
+          <span class="exp-tag">Laboratory Work</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-dates">2022</div>
+        <div class="exp-org">Association of Agricultural Biotechnology Students · KNUST</div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-role">Deputy Research Head</div>
+        <ul class="exp-bullets">
+          <li>Led knowledge sharing and networking among students via the association's social media platforms.</li>
+          <li>Actively promoted the importance of biotechnology in agriculture and health within the student community.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Leadership</span>
+          <span class="exp-tag">Research Coordination</span>
+          <span class="exp-tag">Science Communication</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Projects</h2>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card featured">
+      <div>
+        <span class="project-tag">Featured Project</span>
+        <h3>Food Security Trends in Ghana (1990–2023)</h3>
+        <p>
+          A Python-based analysis of over 30 years of food security data from the World Bank World Development Indicators. The project examined how population growth, agricultural productivity, fertilizer consumption, and undernourishment interact over time in Ghana.
+        </p>
+        <p style="margin-top:0.8rem;">
+          A custom <strong>Food Security Risk Index</strong> was developed to assess long-term food security pressure, with full data collection via the World Bank API, cleaning, EDA, correlation analysis, and time-series visualization.
+        </p>
+        <div class="project-tools" style="margin-top:1rem;">
+          <span class="tool-chip">Python</span>
+          <span class="tool-chip">Pandas</span>
+          <span class="tool-chip">Matplotlib</span>
+          <span class="tool-chip">Seaborn</span>
+          <span class="tool-chip">Scikit-learn</span>
+          <span class="tool-chip">World Bank API</span>
+        </div>
+        <a href="https://github.com/MaWusaM/ghana-food-security-analysis" target="_blank" class="project-link">View on GitHub</a>
+      </div>
+      <div class="project-insights">
+        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;color:var(--ink-light);margin-bottom:0.5rem;">Key findings</div>
+        <div class="insight"><div class="insight-dot"></div>Ghana's population grew steadily over 3 decades — tracked against food supply changes.</div>
+        <div class="insight"><div class="insight-dot"></div>Agricultural production increased significantly, correlating with reduced undernourishment.</div>
+        <div class="insight"><div class="insight-dot"></div>Fertilizer consumption showed strong positive relationship with food production output.</div>
+        <div class="insight"><div class="insight-dot"></div>Food Security Risk Index surfaced periods of high pressure relative to population growth.</div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <span class="project-tag">Research · Data Analysis</span>
+      <h3>UNFPA &amp; UNICEF Adolescent Girls Empowerment — End-of-Term Evaluation</h3>
+      <p>Contributed to the data collection, cleaning, and analysis for the end-of-term evaluation of a joint UNFPA &amp; UNICEF development project focused on adolescent girls empowerment in Ghana.</p>
+      <div class="project-tools">
+        <span class="tool-chip">Survey Design</span>
+        <span class="tool-chip">Field Data Collection</span>
+        <span class="tool-chip">Data Cleaning</span>
+        <span class="tool-chip">Evaluation</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <span class="project-tag">Research · Agriculture</span>
+      <h3>Grain Grading &amp; Certification Project — Baseline Survey</h3>
+      <p>Supported the GGCP Baseline Survey by collecting and validating primary data across communities, organizing field datasets, and contributing to the analytical reporting phase.</p>
+      <div class="project-tools">
+        <span class="tool-chip">Questionnaire Design</span>
+        <span class="tool-chip">Household Surveys</span>
+        <span class="tool-chip">Statistical Analysis</span>
+        <span class="tool-chip">Reporting</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Education</h2>
+  </div>
+  <div class="exp-list">
+    <div class="edu-item">
+      <div class="exp-meta">
+        <div class="exp-dates">2019 – 2023</div>
+      </div>
+      <div>
+        <div class="edu-degree">BSc Agricultural Biotechnology</div>
+        <div class="edu-school">Kwame Nkrumah University of Science and Technology (KNUST), Kumasi</div>
+        <div class="edu-detail">
+          Relevant skills: R, Statistical Data Analysis, Scientific Writing, Scientific Communications, Biotechnology, Plant Genetics.<br>
+          Activities: Association of Agricultural Biotechnology Students (AABS) — Deputy Research Head; Pentecost Students and Associates (PENSA) KNUST.
+        </div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="exp-meta">
+        <div class="exp-dates">Feb 2026</div>
+      </div>
+      <div>
+        <div class="edu-degree">Certificate of Completion — Data Analysis</div>
+        <div class="edu-school">ALX Ghana</div>
+        <div class="edu-detail">Python · SQL · Power BI · Data Analytics · Data Visualization · EDA · Data Cleaning · Reporting</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="exp-meta">
+        <div class="exp-dates">Sep 2025</div>
+      </div>
+      <div>
+        <div class="edu-degree">Professional Development Skills in the Digital Age</div>
+        <div class="edu-school">ALX</div>
+        <div class="edu-detail">Problem Identification &amp; Framing · Programmatic Thinking · Critical Thinking · Prototyping · Agile Team Management · UX Research &amp; UI Design</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="exp-meta">
+        <div class="exp-dates">Nov 2024</div>
+      </div>
+      <div>
+        <div class="edu-degree">Data Science with Python</div>
+        <div class="edu-school">Great Learning</div>
+        <div class="edu-detail">Python · Statistics · Data Analytics · Machine Learning · Jupyter Notebook · Regression Models · Data Transformation · Visualization</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2 class="section-title">Get in touch</h2>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-lead">"I'm always open to opportunities where data can be used to generate insights and drive impact."</p>
+      <p style="margin-top:1.5rem;font-size:0.9rem;color:rgba(255,255,255,0.7);line-height:1.7;font-weight:300;">
+        Whether you're hiring, collaborating on a research project, or exploring data-driven solutions in agriculture or development — I'd love to hear from you.
+      </p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:mubarikwusamanga@gmail.com" class="contact-link">
+        <div class="contact-link-icon">✉</div>
+        <div>
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-value">mubarikwusamanga@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/mubarik-wusa-manga-5439911b4" target="_blank" class="contact-link">
+        <div class="contact-link-icon">in</div>
+        <div>
+          <div class="contact-link-label">LinkedIn</div>
+          <div class="contact-link-value">mubarik-wusa-manga-5439911b4</div>
+        </div>
+      </a>
+      <a href="https://github.com/MaWusaM" target="_blank" class="contact-link">
+        <div class="contact-link-icon">⌥</div>
+        <div>
+          <div class="contact-link-label">GitHub</div>
+          <div class="contact-link-value">github.com/MaWusaM</div>
+        </div>
+      </a>
+      <a href="https://sites.google.com/view/mubarikwusamanga/home" target="_blank" class="contact-link">
+        <div class="contact-link-icon">🌐</div>
+        <div>
+          <div class="contact-link-label">Current site</div>
+          <div class="contact-link-value">mubarikwusamanga.com</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Mubarik Wusa-Manga · Accra, Ghana</p>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
